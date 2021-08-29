@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+.page-title {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  text-align: center;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 375px;
+  padding: 1rem;
+}
+
+.green {
+  color: var(--green);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

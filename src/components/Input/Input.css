@@ -1,0 +1,34 @@
+input {
+  padding: 1rem;
+  background: var(--light1);
+  border: 1px solid var(--light2);
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-weight: 500;
+  line-height: 19px;
+}
+input:focus {
+  outline: none;
+}
+
+/* MessageInput */
+.message-input {
+  position: relative;
+}
+.message-input input {
+  border-radius: 100px;
+  padding-right: 4rem;
+}
+.message-input .send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: var(--green);
+  border-radius: 100%;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+}

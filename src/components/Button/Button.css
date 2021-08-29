@@ -1,0 +1,9 @@
+.primary-btn {
+  background: var(--green);
+  border-radius: 100px;
+  padding: 1rem 0.5rem;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+}
