@@ -27,6 +27,7 @@ function Chatroom() {
   useEffect(() => {
     if (token && roomId) {
       const socket = io.connect(process.env.REACT_APP_SOCKET_URL);
+      socket.emit('identity', { username: currentUsername, roomId });
       socket.on(`receive_message_${roomId}`, ({ username, message }) => {
         if (username !== currentUsername) {
           dispatch({
@@ -57,7 +58,7 @@ function Chatroom() {
       dispatch(
         getMessages(roomId, {
           offset,
-          DEFAULT_LIMIT_MESSAGES,
+          limit: DEFAULT_LIMIT_MESSAGES,
         })
       )
         .then(() => scrollSmoothToBottom('messages'))

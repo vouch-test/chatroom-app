@@ -20,7 +20,7 @@ function JoinChatroom() {
       setAuthToken(token);
     }
     history.replace(`/${storedRoomId}`);
-  }, [token, storedRoomId]);
+  }, [token, storedRoomId, history]);
 
   const joinChatRoom = async () => {
     let valid = true;
@@ -33,14 +33,16 @@ function JoinChatroom() {
           username,
           roomId,
         })
-      ).then((data) => {
-        if (data?.token) {
-          setAuthToken(data?.token);
-          history.push({
-            pathname: `/${roomId}`,
-          });
-        }
-      });
+      )
+        .then((data) => {
+          if (data?.token) {
+            setAuthToken(data?.token);
+            history.push({
+              pathname: `/${roomId}`,
+            });
+          }
+        })
+        .catch((e) => alert('Username already joined chatroom'));
     }
   };
 
