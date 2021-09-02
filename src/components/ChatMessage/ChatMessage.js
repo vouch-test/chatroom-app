@@ -8,7 +8,7 @@ function ChatMessage({ isForeign = false, username = '', content = '' }) {
       }`}
     >
       {isForeign && <span className="username col-span-full">{username}</span>}
-      <div className="message-content">{content}</div>
+      <div className="message-content p-2">{content}</div>
     </div>
   );
 }

@@ -1,29 +1,19 @@
+import { useSelector } from 'react-redux';
 import ChatMessage from '../../components/ChatMessage';
 
 function ChatMessages() {
+  const messages = useSelector((state) => state.chatroom.messages);
+  const username = useSelector((state) => state.chatroom.username);
+
   return (
     <>
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={false} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={false} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={false} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={false} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={false} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
-      <ChatMessage username="Vu Pham" content="Hello World" isForeign={true} />
+      {messages.map((message) => (
+        <ChatMessage
+          username={message?.participant?.username}
+          content={message?.content}
+          isForeign={message?.participant?.username !== username}
+        />
+      ))}
     </>
   );
 }
