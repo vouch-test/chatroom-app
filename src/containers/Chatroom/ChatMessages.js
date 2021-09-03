@@ -9,6 +9,7 @@ function ChatMessages() {
     <>
       {messages.map((message) => (
         <ChatMessage
+          key={message.id}
           username={message?.participant?.username}
           content={message?.content}
           isForeign={message?.participant?.username !== username}

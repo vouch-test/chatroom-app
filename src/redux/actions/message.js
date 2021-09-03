@@ -83,7 +83,7 @@ export function sendMessage(data) {
   };
 }
 
-export function getMessages(roomId, params) {
+export function getMessages(roomId, params, isNew = false) {
   return (dispatch) => {
     return new Promise(async (resolve, reject) => {
       dispatch({
@@ -93,7 +93,10 @@ export function getMessages(roomId, params) {
         const { data } = await getMessagesAPI(roomId, params);
         dispatch({
           type: GET_MESSAGES_SUCCESS,
-          payload: data,
+          payload: {
+            ...data,
+            isNew,
+          },
         });
         resolve();
       } catch (error) {

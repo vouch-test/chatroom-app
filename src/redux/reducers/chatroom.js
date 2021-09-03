@@ -53,10 +53,17 @@ const ChatroomReducer = (state = INITIAL_STATE, action) => {
       };
     }
     case GET_MESSAGES_SUCCESS: {
+      if (action.payload?.isNew) {
+        return {
+          ...state,
+          isGettingMessages: false,
+          messages: action.payload.messages,
+        };
+      }
       return {
         ...state,
         isGettingMessages: false,
-        messages: action.payload.messages,
+        messages: [...action.payload.messages, ...state.messages],
       };
     }
     case GET_MESSAGES_FAILED: {

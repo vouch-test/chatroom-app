@@ -11,6 +11,12 @@ function MessageInput({ placeholder = '', className = '', sendMessage }) {
         placeholder={placeholder}
         value={messageContent}
         onChange={(e) => setMessageContent(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && messageContent.length > 0) {
+            sendMessage(messageContent);
+            setMessageContent('');
+          }
+        }}
       />
       <div
         onClick={() => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import io from 'socket.io-client';
@@ -12,7 +12,7 @@ import { ADD_NEW_PARTICIPANT, APPEND_MESSAGE } from '../../redux/types';
 import { setAuthToken } from '../../utils/axios';
 import ChatMessages from './ChatMessages';
 
-const DEFAULT_LIMIT_MESSAGES = 15;
+const DEFAULT_LIMIT_MESSAGES = 30;
 
 function Chatroom() {
   const token = useSelector((state) => state?.chatroom?.token);
@@ -64,7 +64,7 @@ function Chatroom() {
         .then(() => scrollSmoothToBottom('messages'))
         .catch(() => {});
     }
-  }, [offset]);
+  }, []);
 
   const handleExit = async () => {
     await dispatch(
@@ -89,7 +89,9 @@ function Chatroom() {
           content: messageContent,
         },
       })
-    );
+    )
+      .then(() => scrollSmoothToBottom('messages'))
+      .catch(() => scrollSmoothToBottom('messages'));
   };
 
   const scrollSmoothToBottom = (id) => {
@@ -98,6 +100,19 @@ function Chatroom() {
       top: div.scrollHeight - div.clientHeight,
       behavior: 'smooth',
     });
+  };
+
+  const messagesRef = useRef();
+  const onScroll = () => {
+    // const scrollTop = messagesRef.current.scrollTop;
+    // if (scrollTop < 10) {
+    //   dispatch(
+    //     getMessages(roomId, {
+    //       offset: offset + DEFAULT_LIMIT_MESSAGES,
+    //       limit: DEFAULT_LIMIT_MESSAGES,
+    //     })
+    //   );
+    // }
   };
 
   if (!token) {
@@ -118,7 +133,9 @@ function Chatroom() {
       </div>
       <div
         id="messages"
+        ref={messagesRef}
         className="col-span-full h-full mb-4 overflow-auto hide-scrollbar"
+        onScroll={onScroll}
       >
         <ChatMessages />
       </div>
